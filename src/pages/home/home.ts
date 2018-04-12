@@ -10,6 +10,8 @@ export class HomePage {
 
   isLoggedIn:boolean = false;
   users: any;
+  accessToken: string;
+  res: any;
 
   constructor(private fb: Facebook) {
     fb.getLoginStatus()
@@ -30,6 +32,11 @@ export class HomePage {
         if(res.status === "connected") {
           this.isLoggedIn = true;
           this.getUserDetail(res.authResponse.userID);
+          console.log(res)
+          this.res = res;
+
+          this.accessToken = res.authResponse.accessToken;
+          console.log(this.accessToken)
         } else {
           this.isLoggedIn = false;
         }
